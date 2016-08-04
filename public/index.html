@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="phytotron">
+
+<head>
+    <meta charset="utf-8">
+    <title>Phytotron User</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <header>
+            <nav class="navbar-inverse navbar-fixed-top form-group" role="banner">
+                <div class="container">
+                    <!--                <nav role="navigation">-->
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header col-sm-12">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">NCSU Phytotron</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="applicationController">
+                        <ul class="nav navbar-nav">
+                            <li  ng-class="{ active: isActive('/home')}"><a href="#/home">Application <span class="sr-only">(current)</span></a></li>
+                            <!--                            <li><a href="#/home">New App(Temp)</a></li>-->
+                            <li  ng-class="{ active: isActive('/revise')}"><a href="#/revise">Revise Application</a></li>
+                            <li ng-class="{ active: isActive('/history')}"><a href="#/history">Application History</a></li>
+                            <!--                            <li><a href="#">Project History</a></li>-->
+                            <li ng-class="{ active: isActive('/chambers')}"><a href="#/chambers">Chambers</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                    <!-- /.container-fluid -->
+                    <!--                </nav>-->
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <ng-view></ng-view>
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>

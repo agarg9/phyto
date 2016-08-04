@@ -1,0 +1,426 @@
+<div class="container-fluid">
+    <div class="panel panel-custom">
+        <div class="panel-heading" id="filterPanelHead">Filter</div>
+        <div class="panel-body" id="filterPanelBody">
+            <form class="form-horizontal" role="search">
+                <div class="form-group">
+                    <label for="projectTitle" class="col-sm-2 text-right">Project Title:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="projectTitle" placeholder="Enter project name">
+                    </div>
+
+                    <div class="form-group-row">
+                        <label for="projectStart" class="col-sm-1 text-right">Start</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="projectStart" placeholder="Start date">
+                        </div>
+                        <label for="projectEnd" class="col-sm-1 text-right">End</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="projectEnd" placeholder="End date">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="projectId" class="col-sm-2 text-right">Project Id:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="projectTitle" placeholder="Enter project name">
+                    </div>
+                    <label for="status" class="col-sm-1 text-right">Status:</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="department">
+                            <option>Submitted</option>
+                            <option>Approved</option>
+                            <option>Revised</option>
+                            <option>Pending</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary col-sm-2">Filter</button>
+                <!--
+                        <div class="form-group col-sm-6">
+                            <button type="button" class="btn btn-primary col-sm-4">Submit</button>
+                            <div class="col-sm-1"></div>
+                            <button type="button" class="btn btn-primary col-sm-4">Save Application</button>
+                        </div>-->
+
+            </form>
+
+
+        </div>
+    </div>
+
+    <div>
+
+        <table class="table table-striped table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date Start</th>
+                    <th>Date End</th>
+                    <th>Last Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="savedApp in savedApps| orderBy:sortColumn">
+                    <td><a href="#">{{savedApp.title}}</a></td>
+                    <td>{{savedApp.start}}</td>
+                    <td>{{savedApp.end}}</td>
+                    <td>{{savedApp.lastModified}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a type="button" href="#/newAppl" class="btn btn-primary">New Application</a>
+<!--        <button type="button" class="btn btn-info">Edit Application</button>-->
+    </div>
+
+
+
+
+
+    <form class="form-horizontal col-sm-12" style="display:none" role="form">
+        <div class="form-group">
+            <label for="projectTitle" class="col-sm-2 ">Project Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="projectTitle" placeholder="Enter Project Title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="applicant" class="col-sm-1">Applicant</label>
+            <label for="name" class="col-sm-1 text-right">Name:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="name" placeholder="Enter full name">
+            </div>
+
+            <!--label for="firstName" class="col-sm-1">first Name:</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="firstName" placeholder="First name">
+                </div>
+                <label for="lastName" class="col-sm-1">Last Name:</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter Project Title">
+                </div -->
+            <label for="email" class="col-sm-1 text-right">Email Id:</label>
+            <div class="col-sm-2">
+                <input type="email" class="form-control" id="email" placeholder="Email ID">
+            </div>
+            <label for="department" class="col-sm-1 text-right">Department:</label>
+            <div class="col-sm-2">
+                <select class="form-control" id="department">
+                    <option>Computer Science</option>
+                    <option>Computer Engineering</option>
+                    <option>Phytotron</option>
+                    <option>Misc</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default addButton"><i class="fa fa-plus">+</i></button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pi" class="col-sm-1">PI</label>
+            <label for="name" class="col-sm-1 text-right">Name:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="name" placeholder="Enter full name">
+            </div>
+
+            <!--label for="firstName" class="col-sm-1">first Name:</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="firstName" placeholder="First name">
+                </div>
+                <label for="lastName" class="col-sm-1">Last Name:</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter Project Title">
+                </div -->
+            <label for="email" class="col-sm-1 text-right">Email Id:</label>
+            <div class="col-sm-2">
+                <input type="email" class="form-control" id="email" placeholder="Email ID">
+            </div>
+            <label for="department" class="col-sm-1 text-right">Department:</label>
+            <div class="col-sm-2">
+                <select class="form-control" id="department">
+                    <option>Computer Science</option>
+                    <option>Computer Engineering</option>
+                    <option>Phytotron</option>
+                    <option>Misc</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group text-center ">
+            <button type="submit" class="btn btn-primary">Add Personnel</button>
+        </div>
+        <div class="form-group">
+            <label for="startdate" class="col-sm-2 text-right">Start Date</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="startdate" placeholder="Project Start Date">
+            </div>
+            <label for="enddate" class="col-sm-1 text-right text-nowrap">End Date</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="enddate" placeholder="Project End Date">
+            </div>
+        </div>
+        <p><strong>Experimental Conditions:</strong></p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-highlight">
+                <thead>
+                    <th>Lights On</th>
+                    <th>Day Temp(C)</th>
+                    <th>Lights off</th>
+                    <th>Night Temp(C)</th>
+                    <th>Night Interrupt</th>
+                    <th>Number of pots</th>
+                    <th>Container Size</th>
+                    <th>Space</th>
+                    <th>Watering</th>
+                    <th>Species</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Time" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Temperature" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Time" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Temperature" />
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="" value="" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" value="some val" />
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Time" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Temperature" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Time" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Temperature" />
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="" value="" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" value="some val" />
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default  addButton"><i class="fa fa-plus">+</i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label class="col-sm-1">Substrate</label>
+            <div class="col-sm-1 text-center">
+                <input type="checkbox" value="std">std
+                <!--div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me</label>
+                </div-->
+            </div>
+            <div class="col-sm-1 text-center">
+                <input type="checkbox" value="50/50">50/50
+            </div>
+            <div class="col-sm-1 text-Center no-wrap">
+                <input type="checkbox" value="Other">Other
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="other" placeholder="Enter detail">
+            </div>
+        </div>
+        <p>
+            <strong>Transgenic Plant Research Biosafety Verification</strong>
+        </p>
+        <div class="form-group text-right">
+            <label class="col-sm-5">Research uses transgenic plants:</label>
+            <div class="col-sm-1 text-left">
+                <input type="checkbox" value="yes">yes
+            </div>
+            <div class="col-sm-1 text-left">
+                <input type="checkbox" value="no">no
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="commiteeNumber" class="col-sm-5 text-right">If yes, Institutional Biosafety Committee Number:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="commiteeNumber" placeholder="Committee Number">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="relation" class="text-center">Relation of this study to other work and justification for using controlled-environment facilities (Limit 250 words):</label>
+            <textarea class="form-control" rows="3" id="relation"></textarea>
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="summary" class="text-center">Summary of experimental design including an explanation of cultural procedures and/or any special techniques limit 250 words):
+            </label>
+            <textarea class="form-control" rows="3" id="summary"></textarea>
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="timeline" class="text-center">Project timeline including harvest and data collection:
+            </label>
+            <textarea class="form-control" rows="3" id="timeline"></textarea>
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="revision" class="text-center">Reason for extension/revision:
+            </label>
+            <textarea class="form-control" rows="3" id="revision"></textarea>
+        </div>
+        <div class="form-group col-sm-12">
+            <strong>Safety Training/Biosafety Verification</strong>
+            <p><small>I certify that all personnel associated with our research project being conducted in the North Carolina State University Phytotron, including technical staff, graduate students, undergraduate student assistants, post-doctoral associates and visiting research scientists, have received proper training in standard operating procedures of necessary equipment, in proper handling of any chemicals involved in the research, and in the rules and regulations regarding laboratory safety, and all necessary information has been disclosed on the Transgenic Plant Research Biosafety Verification page of this proposal.</small></p>
+            <div class="radio col-sm-1">
+                <label>
+                    <input type="radio" id="agree" name="condition"> Agree
+                </label>
+            </div>
+            <div class="radio col-sm-1">
+                <label>
+                    <input type="radio" id="disagree" name="condition"> Disagree
+                </label>
+            </div>
+
+            <!--div class="col-sm-1 text-left">
+                        <input type="radio" value="agree">Agree
+                    </div>
+                    <div class="col-sm-1 text-left text-nowrap">
+                        <input type="radio" value="disagree">Disagree
+                    </div-->
+        </div>
+        <div class="form-group">
+            <div class="radio">
+                <label class="col-sm-2 text-center"><strong>Affilation:</strong></label>
+                <div class="col-sm-1">
+                    <input type="radio" id="ncsu" name="affilation"> NCSU
+                </div>
+                <div class="col-sm-1">
+                    <input type="radio" id="disagree" name="affilation"> Other
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="accountNo" class="col-sm-3 text-right">Account number to be billed:
+            </label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="accountNo" placeholder="Account no.">
+            </div>
+            <label for="fundSource" class="col-sm-2 text-right">Source of funds</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="fundSource" placeholder="Source">
+            </div>
+        </div>
+        <p>For non-NCSU research please provide billing information below:</p>
+        <div class="form-group col-sm-12">
+            <label for="otherName" class="col-sm-1">Name:
+            </label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="otherName" placeholder="Name">
+            </div>
+            <label for="fundSource" class="col-sm-1 text-right">Email:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="fundSource" placeholder="Source">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="street" class="col-sm-1">Street address:
+            </label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" id="street" placeholder="Enter street address">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="city" class="col-sm-1">City:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="city" placeholder="City">
+            </div>
+            <label for="state" class="col-sm-1 text-right">State:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="state" placeholder="State">
+            </div>
+            <label for="zip" class="col-sm-1 text-right">Zip:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="zip" placeholder="Zip code">
+            </div>
+        </div>
+        <div class="form-group col-sm-6">
+            <button type="button" class="btn btn-primary col-sm-4">Submit</button>
+            <div class="col-sm-1"></div>
+            <button type="button" class="btn btn-primary col-sm-4">Save Application</button>
+        </div>
+    </form>
+
+    <!--form class="form-inline">
+            <div class="form-group">
+                <label for="exampleInputName2">Name</label>
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+            </div>
+            <button type="submit" class="btn btn-primary">Send invitation</button>
+        </form-->
+</div>

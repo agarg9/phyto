@@ -1,0 +1,313 @@
+<form class="form-horizontal col-sm-12" name="applicationForm" role="form" ng-submit="applicationForm.$valid && submit()" novalidate>
+    <div class="form-group">
+        <label for="projectTitle" class="col-sm-2 ">Project Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectTitle" ng-model="appForm.projectTitle" placeholder="Enter Project Title" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div ng-repeat="addInfo in appForm.applicantRow">
+            <label for="applicant" class="col-sm-1">Applicant</label>
+            <label for="nameApplicant" class="col-sm-1 text-right">Name:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="nameApplicant" ng-model="addInfo.nameApplicant" placeholder="Enter full name" required>
+            </div>
+
+            <label for="emailApplicant" class="col-sm-1 text-right">Email Id:</label>
+            <div class="col-sm-2">
+                <input type="email" class="form-control" id="emailApplicant" ng-model="addInfo.emailApplicant" placeholder="Email ID" required>
+            </div>
+            <label for="departmentApplicant" class="col-sm-1 text-right">Department:</label>
+            <div class="row col-sm-3">
+                <div class="col-sm-10">
+                    <select class="form-control" id="departmentApplicant" ng-model="addInfo.departmentApplicant" ng-options="x for x in depts" required>
+                    </select>
+                </div>
+
+                <div class="col-sm-1">
+                    <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-minus"> -</i></button>
+                    <!--
+---Keeping the older button, the new button you added is not clickable.
+
+<button type="button" class="col-sm-1 close" ng-click="deleteRow($index)" data-dismiss="modal">&times;</button>-->
+                </div>
+            </div>
+        </div>
+        <!--        <div class="col-sm-1">-->
+        <!--            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus">+</i></button>-->
+        <!--            <button type="button" class="close text-left"  data-dismiss="modal">&times;</button>-->
+        <!--        </div>-->
+    </div>
+    <div class="form-group">
+        <label for="pi" class="col-sm-1">Principal Instructor</label>
+        <label for="namePI" class="col-sm-1 text-right">Name:</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="namePI" ng-model="appForm.namePI" placeholder="Enter full name">
+        </div>
+        <label for="emailPI" class="col-sm-1 text-right">Email Id:</label>
+        <div class="col-sm-2">
+            <input type="email" class="form-control" id="emailPI" ng-model="appForm.emailPI" placeholder="Email ID">
+        </div>
+        <label for="departmentPI" class="col-sm-1 text-right">Department:</label>
+        <div class="row col-sm-3">
+            <div class="col-sm-10">
+                <select class="form-control" id="departmentPI" ng-model="appForm.departmentPI">
+                    <option>Computer Science</option>
+                    <option>Computer Engineering</option>
+                    <option>Phytotron</option>
+                    <option>Misc</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group text-center ">
+        <button type="submit" ng-click="addAppRow()" class="btn btn-primary">Add Personnel</button>
+    </div>
+    <div class="form-group">
+        <label for="startdate" class="col-sm-2 text-right">Start Date</label>
+        <div class="col-sm-3">
+            <input type="date" class="form-control" id="startdate" ng-model="appForm.startdate" placeholder="Project Start Date" required>
+        </div>
+        <label for="enddate" class="col-sm-1 text-right text-nowrap">End Date</label>
+        <div class="col-sm-3">
+            <input type="date" class="form-control" id="enddate" ng-model="appForm.enddate" placeholder="Project End Date" required>
+        </div>
+    </div>
+    <hr>
+    <p><strong>Experimental Conditions:</strong></p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-highlight">
+            <thead>
+                <th>Lights On</th>
+                <th>Day Temp(C)</th>
+                <th>Lights off</th>
+                <th>Night Temp(C)</th>
+                <th>Night Interrupt</th>
+                <th>Number of pots</th>
+                <th>Container Size</th>
+                <th>Space</th>
+                <th>Watering</th>
+                <th>Species</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expCon in appForm.experimentRow">
+                    <td>
+                        <input type="text" class="form-control" placeholder="Enter Time" ng-model="expCon.lightOn" required/>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" placeholder="Temperature" ng-model="expCon.tempDay" required/>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Enter Time" ng-model="expCon.lightOff" required />
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" placeholder="Temperature" ng-model="expCon.tempNight" required />
+                    </td>
+                    <td class="text-center">
+                        <input type="checkbox" class="" value="" ng-model="expCon.nightInterrupt" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="" ng-model="expCon.numOfPots" placeholder="pots" required />
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="expCon.containerSize" required>
+                            <option>24</option>
+                            <option>12</option>
+                            <option>6</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="expCon.potSpace" required>
+                            <option>Large</option>
+                            <option>Medium</option>
+                            <option>Small</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="expCon.watering" required>
+                            <option>Schedule A</option>
+                            <option>Schedule B</option>
+                            <option>Schedule C</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="expCon.species" required>
+                            <option>corn</option>
+                            <option>Landfill</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" ng-click="deleteExpRow($index)" class="btn btn-default addButton"><i class="fa fa-minus"> -</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center ">
+        <button type="submit" ng-click="addProgram()" class="btn btn-primary">Add Program</button>
+    </div>
+    <hr>
+    <div class="form-group">
+        <div class="radio">
+            <div class="col-sm-1 text-center">
+                <strong>Substrate:</strong>
+            </div>
+            <div class="col-sm-1">
+                <label>
+                    <input type="radio" value="std" name="substrate" ng-model="appForm.substrate" required> Std
+                </label>
+            </div>
+            <div class="col-sm-1">
+                <label>
+                    <input type="radio" value="fiftyfifty" name="substrate" ng-model="appForm.substrate" required> 50/50
+                </label>
+            </div>
+            <div class="col-sm-1">
+                <label>
+                    <input type="radio" value="other" name="substrate" ng-model="appForm.substrate" required> Other
+                </label>
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="substrateOther" ng-model="appForm.substrateOther" placeholder="Enter detail" ng-required="appForm.substrate == 'other'">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <strong>Transgenic Plant Research Biosafety Verification</strong>
+    </div>
+
+    <div class="form-group text-right">
+        <div class="radio">
+            <Strong class="col-sm-5">Research uses transgenic plants:</Strong>
+            <div class="col-sm-1 text-left">
+                <label>
+                    <input type="radio" value="yes" ng-model="appForm.safetyVerify" name="safetyVerify" required>yes
+                </label>
+            </div>
+            <div class="col-sm-1 text-left">
+                <label>
+                    <input type="radio" value="no" ng-model="appForm.safetyVerify" name="safetyVerify" required>no
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="commiteeNumber" class="col-sm-5 text-right">If yes, Institutional Biosafety Committee Number:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="commiteeNumber" ng-model="appForm.commiteeNumber" placeholder="Committee Number" ng-required="appForm.safetyVerify == 'yes'">
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <label for="relation" class="text-center">Relation of this study to other work and justification for using controlled-environment facilities (Limit 250 words):
+        </label>
+        <textarea class="form-control" rows="3" id="relation" ng-model="appForm.relation"></textarea>
+    </div>
+    <div class="form-group col-sm-12">
+        <label for="summary" class="text-center">Summary of experimental design including an explanation of cultural procedures and/or any special techniques limit 250 words):
+        </label>
+        <textarea class="form-control" rows="3" id="summary" ng-model="appForm.summary"></textarea>
+    </div>
+    <div class="form-group col-sm-12">
+        <label for="timeline" class="text-center">Project timeline including harvest and data collection:
+        </label>
+        <textarea class="form-control" rows="3" id="timeline" ng-model="appForm.timeline"></textarea>
+    </div>
+    <div class="form-group col-sm-12">
+        <label for="revision" class="text-center">Reason for extension/revision:
+        </label>
+        <textarea class="form-control" rows="3" id="revision" ng-model="appForm.revision"></textarea>
+    </div>
+    <hr>
+    <div class="form-group col-sm-12 text-justify">
+        <strong>Safety Training/Biosafety Verification</strong>
+        <p><small>I certify that all personnel associated with our research project being conducted in the North Carolina State University Phytotron, including technical staff, graduate students, undergraduate student assistants, post-doctoral associates and visiting research scientists, have received proper training in standard operating procedures of necessary equipment, in proper handling of any chemicals involved in the research, and in the rules and regulations regarding laboratory safety, and all necessary information has been disclosed on the Transgenic Plant Research Biosafety Verification page of this proposal.</small></p>
+        <div class="radio col-sm-1">
+            <label>
+                <input type="radio" value="agree" name="condition" ng-model="appForm.condition" required> Agree
+            </label>
+        </div>
+        <div class="radio col-sm-1">
+            <label>
+                <input type="radio" value="disagree" name="condition" ng-model="appForm.condition"> Disagree
+            </label>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="radio">
+            <div class="col-sm-2 text-center"><strong>Affiliation:</strong></div>
+            <div class="col-sm-1">
+                <label>
+                    <input type="radio" value="ncsu" id="ncsu" name="appForm.affiliation" ng-model="appForm.affiliation" required> NCSU
+                </label>
+            </div>
+            <div class="col-sm-1">
+                <label>
+                    <input type="radio" value="other" id="other" name="appform.affiliation" ng-model="appForm.affiliation" required> Other
+                </label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="form-group" ng-show="appForm.affiliation=='ncsu'">
+            <label for="accountNo" class="col-sm-3 text-right">Account number to be billed:
+            </label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="accountNo" ng-model="appForm.accountNo" placeholder="Account no." ng-required="appForm.affiliation == 'ncsu'">
+            </div>
+            <label for="fundSource" class="col-sm-2 text-right">Source of funds</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="fundSource" ng-model="appForm.fundSource" placeholder="Source" ng-required="appForm.affiliation == 'ncsu'">
+            </div>
+        </div>
+        <div ng-show="appForm.affiliation=='other'">
+            <p>For non-NCSU research please provide billing information below:</p>
+            <div class="form-group col-sm-12">
+                <label for="otherName" class="col-sm-1">Name:
+                </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="otherName" ng-model="appForm.otherName" placeholder="Name" ng-required="appForm.affiliation == 'other'">
+                </div>
+                <label for="otherEmail" class="col-sm-1 text-right">Email:</label>
+                <div class="col-sm-5">
+                    <input type="email" class="form-control" id="otherEmail" ng-model="appForm.otherEmail" placeholder="Email id" ng-required="appForm.affiliation == 'other'">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label for="otherStreet" class="col-sm-1">Street address:
+                </label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" id="otherStreet" ng-model="appForm.otherStreet" placeholder="Enter street address" ng-required="appForm.affiliation == 'other'">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label for="otherCity" class="col-sm-1">City:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="otherCity" ng-model="appForm.otherCity" placeholder="City" ng-required="appForm.affiliation == 'other'">
+                </div>
+                <label for="otherState" class="col-sm-1 text-right">State:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="otherState" ng-model="appForm.otherState" placeholder="State" ng-required="appForm.affiliation == 'other'">
+                </div>
+                <label for="otherZip" class="col-sm-1 text-right">Zip:</label>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" id="otherZip" ng-model="appForm.otherZip" placeholder="Zip code" ng-required="appForm.affiliation == 'other'">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-8">
+        <button type="submit" class="btn btn-primary col-sm-3" ng-disabled="applicationForm.$invalid">Submit</button>
+        <div class="col-sm-1"></div>
+        <button ng-click="save()" class="btn btn-primary col-sm-3">Save Application</button>
+
+
+        <div class="col-sm-1"></div>
+        <button ng-click="return()" class="btn btn-primary col-sm-3">Return</button>
+    </div>
+</form>
+<pre>Submit={{list}}</pre>
+<pre>Save={{listb}}</pre>
+<pre>App Form status={{applicationForm.$valid}}</pre>

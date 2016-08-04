@@ -1,0 +1,81 @@
+<div class="container-fluid">
+
+    <div class="panel panel-custom">
+        <div class="panel-heading" id="filterPanelHead">Filter</div>
+        <div class="panel-body" id="filterPanelBody">
+            <form class="form-horizontal" role="search">
+                <div class="form-group">
+                    <label for="projectTitle" class="col-sm-2 text-right">Project Title:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="projectTitle" placeholder="Enter project name">
+                    </div>
+
+                    <div class="form-group-row">
+                        <label for="projectStart" class="col-sm-1 text-right">Start</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="projectStart" placeholder="Start date">
+                        </div>
+                        <label for="projectEnd" class="col-sm-1 text-right">End</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="projectEnd" placeholder="End date">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="projectId" class="col-sm-2 text-right">Project Id:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="projectTitle" placeholder="Enter project name">
+                    </div>
+                    <label for="status" class="col-sm-1 text-right">Status:</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="department">
+                            <option>Submitted</option>
+                            <option>Approved</option>
+                            <option>Revised</option>
+                            <option>Pending</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary col-sm-2">Filter</button>
+                <!--
+                        <div class="form-group col-sm-6">
+                            <button type="button" class="btn btn-primary col-sm-4">Submit</button>
+                            <div class="col-sm-1"></div>
+                            <button type="button" class="btn btn-primary col-sm-4">Save Application</button>
+                        </div>-->
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+    <div>
+        <table class="table table-striped table-condensed table-hover" id="historyTable">
+            <thead>
+                <tr>
+                    <th ng-click="sortData('projectId')">Project Id<div ng-class="getSortClass('projectId')"></div></th>
+                    <th ng-click="sortData('projectTitle')">Title<div ng-class="getSortClass('projectTitle')"></div></th>
+                    <th ng-click="sortData('status')">Status<div ng-class="getSortClass('status')"></div></th>
+                    <th ng-click="sortData('submitDate')">Date Submitted<div ng-class="getSortClass('submitDate')"></div></th>
+                    <th ng-click="sortData('start')">Date Start<div ng-class="getSortClass('start')"></div></th>
+                    <th ng-click="sortData('end')">Date End<div ng-class="getSortClass('end')"></div></th>
+                    <th ng-click="sortData('lastModified')">Last Modified<div ng-class="getSortClass('lastModified')"></div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="historyApp in historyApps | orderBy:sortColumn:reverseSort">
+                    <td>{{historyApp.projectId}}</td>
+                    <td><a href="#">{{historyApp.projectTitle}}</a></td>
+                    <td>{{historyApp.status}}</td>
+                    <td>{{historyApp.submitDate| date:"dd-MMM-yy"}}</td>
+                    <td>{{historyApp.start| date:"dd/MMM/yy"}}</td>
+                    <td>{{historyApp.end| date:"dd/MMM/yy"}}</td>
+                    <td>{{historyApp.lastModified|date:"MMM d, y h:mm:ss a"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

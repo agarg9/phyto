@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="phytotron">
+
+<head>
+    <meta charset="utf-8">
+    <title>Phytotron User</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container-fluid" id="index2">
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <div>
+            <h2 class="text-center">Dashboard</h2>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">New/Saved Application</a></li>
+                <li><a href="newApp.html">New App(Temp)</a></li>
+                <li><a href="#">Extend/Revise Application</a></li>
+                <li><a href="#">Application History</a></li>
+                <li><a href="#">Assigned Chambers</a></li>
+                <li><a href="#">Project History</a></li>
+            </ul>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Project Title</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form>
+                        <tr>
+                            <td>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="599861" name="projectList"> 599861
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="radiotext">Sample Project 1</div>
+                            </td>
+                            <td>9/24/16</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" id="88473" name="projectList"> JNE
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="radiotext">
+                                    <label for="88473">Sample Project 2</label>
+                                </div>
+                            </td>
+                            <td>4/23/16</td>
+                        </tr>
+                    </form>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-info">New Application</button>
+            <button type="button" class="btn btn-info">Edit Application</button>
+        </div>
+    </div>
+</body>
+
+</html>
