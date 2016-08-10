@@ -108,7 +108,7 @@
                         <input type="checkbox" class="" value="" ng-model="expCon.nightInterrupt" />
                     </td>
                     <td>
-                        <input type="text" class="form-control" value="" ng-model="expCon.numOfPots" placeholder="pots" required />
+                        <input type="number" class="form-control" value="" ng-model="expCon.numOfPots" placeholder="pots" required />
                     </td>
                     <td>
                         <select class="form-control" ng-model="expCon.containerSize" required>
@@ -168,7 +168,7 @@
                     <input type="radio" value="other" name="substrate" ng-model="appForm.substrate" required> Other
                 </label>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8"  ng-show="appForm.substrate=='other'">
                 <input type="text" class="form-control" id="substrateOther" ng-model="appForm.substrateOther" placeholder="Enter detail" ng-required="appForm.substrate == 'other'">
             </div>
         </div>
@@ -193,7 +193,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-show="appForm.safetyVerify=='yes'">
         <label for="commiteeNumber" class="col-sm-5 text-right">If yes, Institutional Biosafety Committee Number:</label>
         <div class="col-sm-2">
             <input type="text" class="form-control" id="commiteeNumber" ng-model="appForm.commiteeNumber" placeholder="Committee Number" ng-required="appForm.safetyVerify == 'yes'">
@@ -310,4 +310,5 @@
 </form>
 <pre>Submit={{list}}</pre>
 <pre>Save={{listb}}</pre>
-<pre>App Form status={{applicationForm.$valid}}</pre>
+<pre>App Form statuss={{applicationForm.$valid}}</pre>
+<pre>App Message={{message}}</pre>

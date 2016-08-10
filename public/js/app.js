@@ -32,6 +32,24 @@
 			redirectTo: '/'
 		});
 	})
+	.controller("loginController", function ($scope,$http) {
+		$scope.message = "under Login controller";
+		var login= {
+				email:"",
+				pwd:""}
+		$scope.login=login;
+		$scope.submit=function()
+		{
+			$http.post("/loginSubmit",login)
+			.success(function(login, status, headers, config) {
+				$scope.message = login;
+			})
+			.error(function(data, status, headers, config) {
+				alert( "failure message: " + JSON.stringify({data: data}));
+			});
+			$scope.login="";
+		}
+	})
 	.controller("homeController", function ($scope) {
 		$scope.message = "under home controller";
 		var savedApps = [
@@ -72,14 +90,11 @@
 		$scope.depts = ["Computer Science", "Computer Engineering", "Phytotron", "Plant Bio"];
 		var appForm = {
 				projectTitle: "",
-				//nameApplicant: "",
-				//emailApplicant: "",
 				applicantRow: [{
 					nameApplicant: "",
 					emailApplicant: "",
 					departmentApplicant: ""
 				}],
-				//departmentApplicant: "",
 				namePI: "",
 				emailPI: "",
 				departmentPI: "",
@@ -147,6 +162,9 @@
 				$scope.appForm.experimentRow.splice(index, 1);
 			}
 		}
+		abc={namePI:"ank"
+//				emailPI:"aa@aa.cc"
+					};
 		$scope.list = [];
 		$scope.submit = function () {
 			if ($scope.appForm) {
@@ -164,10 +182,18 @@
 		};
 		$scope.listb = [];
 		$scope.save = function () {
-			if ($scope.appForm) {
+			$http.post("/submitApp",appForm)
+			.success(function(appForm, status, headers, config) {
+				$scope.message = appForm;
+			})
+			.error(function(data, status, headers, config) {
+				alert( "failure message: " + JSON.stringify({data: data}));
+			});
+			
+		/*	if ($scope.appForm) {
 				$scope.listb.push(this.appForm);
 				$scope.appForm = '';
-			}
+			}*/
 		}
 		$scope.return = function () {
 			window.history.back();

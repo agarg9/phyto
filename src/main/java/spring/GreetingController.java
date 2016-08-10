@@ -40,12 +40,15 @@ public class GreetingController {
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
 	
-	
-	@RequestMapping(value = "/savecompany", method = RequestMethod.POST)
-	public  @ResponseBody String saveCompany( @RequestParam("emailPI") String emailPI,
+/*	@RequestMapping(value = "/submitApp", method = RequestMethod.POST)
+	public  @ResponseBody void saveCompany( @RequestParam("emailPI") String emailPI,
 			@RequestParam("projectTitle") long prjTitle,
-			@RequestParam("namePI") String namePI) {		
-		return "The company data (email: " + emailPI + ", employees: "+ String.valueOf( prjTitle ) + ", PI Name: " + namePI + ") is saved";
-	}
+			@RequestParam("namePI") String namePI
+			@RequestParam (value = "namePI") String namePI
+			) {	
+		System.out.println("==== in submitApp ====");
+//		return "The company data (email: " + emailPI + ", employees: "+ String.valueOf( prjTitle ) + ", PI Name: " + namePI + ") is saved";
+//		return "The company data ( PI Name: " + namePI + ") is saved";
+	}*/
 
 }

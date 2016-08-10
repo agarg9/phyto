@@ -1,14 +1,14 @@
- <form class="form-horizontal" role="form" id="myLogin">
+ <form class="form-horizontal" role="form" id="myLogin" ng-submit="submit()" ng-controller="loginController">
   <div class="form-group">
     <label class="control-label col-sm-3" for="email">Email:</label>
     <div class="col-sm-5">
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
+      <input type="email" class="form-control" ng-model="login.email" id="email" placeholder="Enter email">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-3" for="pwd">Password:</label>
     <div class="col-sm-5">
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+      <input type="password" class="form-control" ng-model="login.pwd" id="pwd" placeholder="Enter password">
     </div>
   </div>
   <div class="form-group">
@@ -23,4 +23,8 @@
       <button type="submit" class="btn btn-default">Submit</button>
     </div>
   </div>
+  <p>email:{{login.email}} 
+  <p>pass: {{login.pwd}}
+  <p>login:{{login}}
+  <p>Message:{{message}}
 </form>
