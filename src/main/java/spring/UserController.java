@@ -39,4 +39,13 @@ public class UserController {
 		System.out.println("=== In justtocheck List ===");
 		return "sample";
 	}
+	
+	/* @RequestMapping(value = "/user/", method = RequestMethod.GET)
+	    public List<User> listAllApps() {
+	        List<User> users = userService.findAllUsers();
+	        if(users.isEmpty()){
+	            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+	        }
+	        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+	    }*/
 }
