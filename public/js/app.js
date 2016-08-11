@@ -28,6 +28,10 @@
 			templateUrl: "partials/ChamberInfo.html",
 			controller: "chamberController"
 		})
+		.when("/sampleData", {
+			templateUrl: "partials/sampledata.html",
+			controller: "sampledataController"
+		})	
 		.otherwise({
 			redirectTo: '/'
 		});
