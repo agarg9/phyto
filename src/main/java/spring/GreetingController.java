@@ -39,6 +39,11 @@ public class GreetingController {
 		System.out.println("==== in greeting ====");
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
+	/*@RequestMapping("/abcd")
+	public @ResponseBody String abcd() {
+		System.out.println("==== in abcd ====");
+		return "abb";
+	}*/
 	
 /*	@RequestMapping(value = "/submitApp", method = RequestMethod.POST)
 	public  @ResponseBody void saveCompany( @RequestParam("emailPI") String emailPI,

@@ -28,6 +28,15 @@ public class Application {
 	String otherZip;
 	Applicant[] applicantRow;
 	ExperimentalConditions[] experimentRow;
+	String lastModified;
+	public Application(){
+	}
+	public Application(String projectTitle,Date startdate,Date enddate,String lastModified){
+		this.projectTitle=projectTitle;
+		this.startdate=startdate;
+		this.enddate=enddate;
+		this.lastModified=lastModified;
+	}
 	public ExperimentalConditions[] getExperimentRow() {
 		return experimentRow;
 	}
@@ -40,8 +49,7 @@ public class Application {
 	public void setApplicantRow(Applicant[] applicantRow) {
 		this.applicantRow = applicantRow;
 	}
-	public Application(){
-	}
+	
 	public String getProjectTitle() {
 		return projectTitle;
 	}

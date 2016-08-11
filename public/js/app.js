@@ -50,7 +50,23 @@
 			$scope.login="";
 		}
 	})
-	.controller("homeController", function ($scope) {
+	.controller("homeController", function ($scope,$http) {
+		
+		$scope.savedApps=$http.get('/applicationList')
+		.then(function success(response) {
+			$scope.applicationList = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+			$log.info(response);
+		},function failure(response){
+			$scope.applicationList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+		});
+		
+		
 		$scope.message = "under home controller";
 		var savedApps = [
 		                 {
@@ -78,7 +94,7 @@
 		                	 lastModified: "3/25/2015 17:23"
 		                 }
 		                 ];
-		$scope.savedApps = savedApps;
+//		$scope.savedApps = savedApps;
 
 	})
 	.controller("newApplController", function ($scope,$http) {

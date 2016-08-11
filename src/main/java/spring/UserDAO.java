@@ -14,5 +14,7 @@ public class UserDAO {
 	users.add(new User("Ank@nc.su","pa"));
 	users.add(new User("Ankit@ncsu.edu","password"));
 	}
-
+	public List listUser() {
+		return users;
+	}
 }
