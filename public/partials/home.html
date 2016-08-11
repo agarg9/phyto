@@ -12,11 +12,11 @@
                     <div class="form-group-row">
                         <label for="projectStart" class="col-sm-1 text-right">Start</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="projectStart" placeholder="Start date">
+                            <input type="date" class="form-control" id="projectStart" placeholder="Start date">
                         </div>
                         <label for="projectEnd" class="col-sm-1 text-right">End</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="projectEnd" placeholder="End date">
+                            <input type="date" class="form-control" id="projectEnd" placeholder="End date">
                         </div>
                     </div>
                 </div>
@@ -61,10 +61,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="savedApp in savedApps| orderBy:sortColumn">
+<!--                 <tr ng-repeat="savedApp in savedApps| orderBy:sortColumn">
                     <td><a href="#">{{savedApp.title}}</a></td>
                     <td>{{savedApp.start}}</td>
                     <td>{{savedApp.end}}</td>
+                    <td>{{savedApp.lastModified}}</td>
+                </tr> -->
+                  <tr ng-repeat="savedApp in applicationList| orderBy:sortColumn">
+                    <td><a href="#">{{savedApp.projectTitle}}</a></td>
+                    <td>{{savedApp.startdate}}</td>
+                    <td>{{savedApp.enddate}}</td>
                     <td>{{savedApp.lastModified}}</td>
                 </tr>
             </tbody>

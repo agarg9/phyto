@@ -1,3 +1,4 @@
+
 /// <reference path="angular.min.js" />
 
 (function () {
@@ -28,15 +29,49 @@
 			templateUrl: "partials/ChamberInfo.html",
 			controller: "chamberController"
 		})
-		.when("/sampleData", {
-			templateUrl: "partials/sampledata.html",
-			controller: "sampledataController"
-		})	
+		.when("/sampleData", {	
+                        templateUrl: "partials/sampledata.html",			
+                        controller: "sampledataController"			
+                }) 
 		.otherwise({
 			redirectTo: '/'
 		});
 	})
-	.controller("homeController", function ($scope) {
+	.controller("loginController", function ($scope,$http) {
+		$scope.message = "under Login controller";
+		var login= {
+				email:"",
+				pwd:""}
+		$scope.login=login;
+		$scope.submit=function()
+		{
+			$http.post("/loginSubmit",login)
+			.success(function(login, status, headers, config) {
+				$scope.message = login;
+			})
+			.error(function(data, status, headers, config) {
+				alert( "failure message: " + JSON.stringify({data: data}));
+			});
+			$scope.login="";
+		}
+	})
+	.controller("homeController", function ($scope,$http) {
+		
+		$scope.savedApps=$http.get('/applicationList')
+		.then(function success(response) {
+			$scope.applicationList = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+			$log.info(response);
+		},function failure(response){
+			$scope.applicationList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+		});
+		
+		
 		$scope.message = "under home controller";
 		var savedApps = [
 		                 {
@@ -64,26 +99,22 @@
 		                	 lastModified: "3/25/2015 17:23"
 		                 }
 		                 ];
-		$scope.savedApps = savedApps;
+// $scope.savedApps = savedApps;
 
 	})
 	.controller("newApplController", function ($scope,$http) {
-		/*this.appForm={};
-            this.submit=function(product){
-                product.appForm.push(this.appForm);
-                this.review={};
-            }*/
+		/*
+		 * this.appForm={}; this.submit=function(product){
+		 * product.appForm.push(this.appForm); this.review={}; }
+		 */
 		$scope.depts = ["Computer Science", "Computer Engineering", "Phytotron", "Plant Bio"];
 		var appForm = {
 				projectTitle: "",
-				//nameApplicant: "",
-				//emailApplicant: "",
 				applicantRow: [{
 					nameApplicant: "",
 					emailApplicant: "",
 					departmentApplicant: ""
 				}],
-				//departmentApplicant: "",
 				namePI: "",
 				emailPI: "",
 				departmentPI: "",
@@ -151,6 +182,9 @@
 				$scope.appForm.experimentRow.splice(index, 1);
 			}
 		}
+		abc={namePI:"ank"
+// emailPI:"aa@aa.cc"
+					};
 		$scope.list = [];
 		$scope.submit = function () {
 			if ($scope.appForm) {
@@ -168,17 +202,25 @@
 		};
 		$scope.listb = [];
 		$scope.save = function () {
-			if ($scope.appForm) {
-				$scope.listb.push(this.appForm);
-				$scope.appForm = '';
-			}
+			$http.post("/submitApp",appForm)
+			.success(function(appForm, status, headers, config) {
+				$scope.message = appForm;
+			})
+			.error(function(data, status, headers, config) {
+				alert( "failure message: " + JSON.stringify({data: data}));
+			});
+			
+		/*
+		 * if ($scope.appForm) { $scope.listb.push(this.appForm); $scope.appForm =
+		 * ''; }
+		 */
 		}
 		$scope.return = function () {
 			window.history.back();
 		}
 
 	}).controller("chamberController", function ($scope, $http,$log) {
-//		$http.get('http://localhost:8080/greeting')
+// $http.get('http://localhost:8080/greeting')
 		$http.get('/greeting')
 		.then(function success(response) {
 			$scope.greeting = response.data;
@@ -192,19 +234,17 @@
 			$scope.status = response.data;
 			$log.info(response);
 		});
-		/*.success(function (data) {
-			$scope.greeting = data;
-		}).error(function(response){
-			alert("Error")}) ;
+		/*
+		 * .success(function (data) { $scope.greeting = data;
+		 * }).error(function(response){ alert("Error")}) ;
 		 */
 
-		/*$http.get("http://rest-service.guides.spring.io/greeting")
-            .then(function (response) {
-                $scope.store = response.data;
-            }, function (errResponse) {
-                console.error('Error while fetching users');
-                return $q.reject(errResponse);
-            })*/
+		/*
+		 * $http.get("http://rest-service.guides.spring.io/greeting")
+		 * .then(function (response) { $scope.store = response.data; }, function
+		 * (errResponse) { console.error('Error while fetching users'); return
+		 * $q.reject(errResponse); })
+		 */
 		$scope.currChambers = [
 		                       {
 		                    	   c_id: "A-06",
@@ -289,7 +329,9 @@
 		$scope.sortColumn = "projectTitle";
 		$scope.reverseSort = false;
 		$scope.sortData = function (column) {
-			$scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false; //If else condition
+			$scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false; // If
+																								// else
+																								// condition
 			$scope.sortColumn = column;
 		}
 		$scope.getSortClass = function (column) {
