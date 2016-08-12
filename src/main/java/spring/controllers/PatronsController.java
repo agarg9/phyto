@@ -1,58 +1,64 @@
 package spring.controllers;
 
-import spring.models.SpringSample;
-import spring.models.SpringSampleDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import spring.models.Patrons;
+import spring.models.PatronsDao;
+
+
 
 @Controller
-@RequestMapping(value="/sampleData")
-public class SpringSampleController {
+@RequestMapping(value="/")
+public class PatronsController {
 	@Autowired
-	  private SpringSampleDao _springSampleDao;
+	  private PatronsDao _patronsDao;
 	  
 	  @RequestMapping(value="/delete")
 	  @ResponseBody
-	  public String delete(long id) {
+	  public String delete(String email) {
 	    try {
-	    	SpringSample springsample = new SpringSample(id);
-	    	_springSampleDao.delete(springsample);
+	    	Patrons patron = new Patrons(email);
+	    	_patronsDao.delete(patron);
 	    }
 	    catch(Exception ex) {
 	      return ex.getMessage();
 	    }
-	    return "User succesfully deleted!";
+	    return "Patron succesfully deleted!";
 	  }
 	  
 	  @RequestMapping(value="/get-by-email")
 	  @ResponseBody
 	  public String getByEmail(String email) {
 	    String userId;
-	    String name;
+	    String password;
+	    String type;
 	    try {
-	    	SpringSample user = _springSampleDao.getByEmail(email);
-	      userId = String.valueOf(user.getId());
-	      name = user.getName();
+	    	Patrons user = _patronsDao.getByEmail(email);
+	    	System.out.println("executed statement 1");
+	      userId = user.getEmail();
+	      password = user.getPwd();
+	      type = user.getUser_type();
 	    }
 	    catch(Exception ex) {
 	    	ex.printStackTrace();
-	      return "User not found 123";
+	      return "User not found";
 	    }
-	    return "The user id is: " + userId + " and name is: "+ name;
+	    return "The user id is: " + userId + " and password is: " + password + " and user type is: "+ type;
+	    
 	  }
 
 	  @RequestMapping(value="/save")
 	  @ResponseBody
-	  public String create(String name, String phone, String email, String address) {
+	  public String create(String email, String pwd, String user_type) {
 	    try {
 	    	System.out.println("hello opening up");
-	    	SpringSample user = new SpringSample(name, phone, email, address);
+	    	Patrons user = new Patrons(email, pwd, user_type);
 	    	System.out.println("created user");
-	    	_springSampleDao.save(user);
+	    	_patronsDao.save(user);
 	    	System.out.println("trying to save");
 	    }
 	    catch(Exception ex) {
@@ -61,5 +67,4 @@ public class SpringSampleController {
 	    
 	    return "User succesfully saved!";
 	  }
-
 }
