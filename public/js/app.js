@@ -123,7 +123,7 @@
 					tempDay: "",
 					lightOff: "",
 					tempNight: "",
-					nightInterrupt: false,
+					nightInterrupt: 0,
 					numOfPots: "",
 					containerSize: "",
 					potSpace: "",
