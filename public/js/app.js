@@ -37,6 +37,26 @@
 			redirectTo: '/'
 		});
 	})
+	.controller("sampledataController",function($scope,$http){
+		$scope.message="asd";
+		var form={
+				name:"",
+				phone:"",
+				email:"",
+				address:""
+		}
+		$scope.form=form;
+		$scope.submit=function(){
+			$http.post("/saveSampleForm",form)
+			.success(function(form, status, headers, config) {
+				$scope.message = form;
+			})
+			.error(function(data, status, headers, config) {
+				alert( "failure message: " + JSON.stringify({data: data}));
+			});
+		}
+		
+	})
 	.controller("loginController", function ($scope,$http) {
 		$scope.message = "under Login controller";
 		var login= {
