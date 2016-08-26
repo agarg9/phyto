@@ -1,4 +1,4 @@
-package spring.models;
+package edu.models;
 
 import java.util.List;
 
