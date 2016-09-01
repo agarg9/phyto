@@ -10,33 +10,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//@Entity
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
 //@Table(name = "Applicant")
 public class Applicant {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long applicant_id;
 	private String nameApplicant;
 	private String emailApplicant;
 	private String departmentApplicant;
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="application_id")
-//	private Application application;
+	private Application application;
+	@ManyToOne
+    @JoinColumn(name = "applicationid")
+	@JsonBackReference
+	public Application getApplication() {
+		return application;
+	}
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getApplicant_id() {
 		return applicant_id;
 	}
 	public void setApplicant_id(long applicant_id) {
 		this.applicant_id = applicant_id;
 	}
-/*	public Application getApplication() {
-		return application;
-	}
-	public void setApplication(Application application) {
-		this.application = application;
-	}*/
-	
 	public Applicant(){
 	}
 	public String getNameApplicant() {

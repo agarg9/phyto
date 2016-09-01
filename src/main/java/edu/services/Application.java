@@ -16,6 +16,8 @@ import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 //@Table(name = "Application")
 /*@SecondaryTables({
@@ -68,12 +70,22 @@ public class Application {
 	String otherZip;
 //	@Transient
 //	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-	Applicant[] applicantRow;
+	private List<Applicant> applicantRow;
+	@OneToMany(targetEntity=Applicant.class,mappedBy="application",
+			cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JsonManagedReference
+	public List<Applicant> getApplicantRow() {
+		return applicantRow;
+	}
+	public void setApplicantRow(List<Applicant> applicantRow) {
+		this.applicantRow = applicantRow;
+	}
 //	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
 //	@Transient
 	private List<ExperimentalConditions> experimentRow;
 	@OneToMany(targetEntity=ExperimentalConditions.class,mappedBy="application",
-			cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+			cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JsonManagedReference
 	public List<ExperimentalConditions> getExperimentRow() {
 		return experimentRow;
 	}
@@ -91,18 +103,19 @@ public class Application {
 	}
 //	@Column(table="Experimental_Conditions")
 //  @JoinColumn(name = "application_id")
-	@Transient
+	/*@Transient
 	public Applicant[] getApplicantRow() {
 		return applicantRow;
 	}
 	
 	public void setApplicantRow(Applicant[] applicantRow) {
 		this.applicantRow = applicantRow;
-	}
+	}*/
 	
 	public String getProjectTitle() {
 		return projectTitle;
 	}
+	
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}

@@ -73,6 +73,9 @@ public class ApplicationDAO {
 //		System.out.println("app_experimental 0 : "+applicationData.getExperimentRow()[0]);
 //		System.out.println("app_experimental 0 : "+applicationData.getExperimentRow()[0].getLightOff());
 //		System.out.println("applicant 0 : "+applicationData.getApplicantRow()[0].getEmailApplicant());
+//		applicationData.getExperimentRow().setApplication(applicationData);
+		applicationData.getExperimentRow().get(0).setApplication(applicationData);
+		applicationData.getApplicantRow().get(0).setApplication(applicationData);
 		getSession().save(applicationData);
 		System.out.println("App saved sucessfully inside try");
 		
@@ -96,7 +99,7 @@ public class ApplicationDAO {
 		System.out.println("....app data....");
 		} catch (Exception e) {
 			System.out.println("Error in saving");
-			e.printStackTrace();
+//			e.printStackTrace();
 //		  throw new IllegalStateException("A book has a null property", e);
 		}
 	System.out.println("App saved sucessfully");
