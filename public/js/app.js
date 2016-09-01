@@ -222,7 +222,7 @@
 		};
 		$scope.listb = [];
 		$scope.save = function () {
-			$http.post("/submitApp",appForm)
+			$http.post("/saveApp",appForm)
 			.success(function(appForm, status, headers, config) {
 				$scope.message = appForm;
 			})

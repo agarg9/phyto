@@ -15,19 +15,12 @@ public class SpringSample {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@NotNull
-	@Size(min = 2, max = 80)
 	private String name;
 	
-	@NotNull
-	@Size(min = 2, max = 80)
 	private String phone;
 	
-	@NotNull
 	private String email;
 
-	@NotNull
-	@Size(min = 2, max = 80)
 	private String address;
 
 	public SpringSample() { }

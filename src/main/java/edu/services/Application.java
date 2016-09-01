@@ -2,13 +2,52 @@ package edu.services;
 
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+//@Table(name = "Application")
+/*@SecondaryTables({
+    @SecondaryTable(name="Applicant", pkJoinColumns={@PrimaryKeyJoinColumn(name = "applicant_id")}),
+    @SecondaryTable(name="Experimental_Condition", pkJoinColumns={@PrimaryKeyJoinColumn(name = "experimental_id")})
+})*/
+//@SecondaryTable(name="Experimental_Condition")
 public class Application {
+	
+//	@Column(table="application_id")
+	private long application_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public long getApplication_id() {
+		return application_id;
+	}
+	public void setApplication_id(long application_id) {
+		this.application_id = application_id;
+	}
+	public String getLastModified() {
+		return lastModified;
+	}
+	public void setLastModified(String lastModified) {
+		this.lastModified = lastModified;
+	}
 	String projectTitle;
 	String namePI;
 	String emailPI;
 	String departmentPI;
+	@Temporal(TemporalType.DATE)
 	Date startdate;
+	@Temporal(TemporalType.DATE)
 	Date enddate;
 	String substrate;
 	String substrateOther;
@@ -27,8 +66,20 @@ public class Application {
 	String otherCity;
 	String otherState;
 	String otherZip;
+//	@Transient
+//	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
 	Applicant[] applicantRow;
-	ExperimentalConditions[] experimentRow;
+//	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+//	@Transient
+	private List<ExperimentalConditions> experimentRow;
+	@OneToMany(targetEntity=ExperimentalConditions.class,mappedBy="application",
+			cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	public List<ExperimentalConditions> getExperimentRow() {
+		return experimentRow;
+	}
+	public void setExperimentRow(List<ExperimentalConditions> experimentRow) {
+		this.experimentRow = experimentRow;
+	}
 	String lastModified;
 	public Application(){
 	}
@@ -38,15 +89,13 @@ public class Application {
 		this.enddate=enddate;
 		this.lastModified=lastModified;
 	}
-	public ExperimentalConditions[] getExperimentRow() {
-		return experimentRow;
-	}
-	public void setExperimentRow(ExperimentalConditions[] experimentRow) {
-		this.experimentRow = experimentRow;
-	}
+//	@Column(table="Experimental_Conditions")
+//  @JoinColumn(name = "application_id")
+	@Transient
 	public Applicant[] getApplicantRow() {
 		return applicantRow;
 	}
+	
 	public void setApplicantRow(Applicant[] applicantRow) {
 		this.applicantRow = applicantRow;
 	}

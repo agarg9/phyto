@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "applicationData")
+//@Entity
+//@Table(name = "applicationData")
 public class ApplicationData implements Serializable{
 
 	@Id

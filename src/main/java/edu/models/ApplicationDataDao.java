@@ -19,7 +19,11 @@ public class ApplicationDataDao {
 	    return _sessionFactory.getCurrentSession();
 	  }
 
-	  public void save(ApplicationData applicationdata) {
+/*	  public void save(ApplicationData applicationdata) {
+		  getSession().save(applicationdata);
+		  return;
+	  }
+*/	  public void save(ApplicationData applicationdata) {
 	    getSession().save(applicationdata);
 	    return;
 	  }

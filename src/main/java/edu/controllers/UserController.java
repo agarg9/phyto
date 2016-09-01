@@ -18,6 +18,8 @@ public class UserController {
 	private ApplicationDAO applicationDAO;
 	@Autowired
 	private SpringSampleDao samp;
+//	@Autowired
+//	private ApplicationDao appDAO;
 	
 	@RequestMapping(value="/loginSubmit",method=RequestMethod.POST)
 //	public User login(@RequestParam("email") String email,@RequestParam("pwd") String pwd ){
@@ -30,14 +32,20 @@ public class UserController {
 	public Application sumitApp(@RequestBody Application app ){
 		System.out.println(app.getNamePI()+", "+app.getEmailPI()+" , "+app.getDepartmentPI());
 		System.out.println("==== in submitApp ====");
+		try{
+			System.out.println("......");
+			applicationDAO.save(app);//, app.getExperimentRow(),app.getApplicantRow());
+		}catch(Exception ex){
+//			return ex.getMessage();
+		}
 		return app;
 	}
-	@RequestMapping(value="/applicationList",method=RequestMethod.GET)
+	/*@RequestMapping(value="/applicationList",method=RequestMethod.GET)
 	public List getApplications() {
 		System.out.println("=== In Application List ===");
 		System.out.println("List: "+ApplicationDAO.listApplication());
 		return applicationDAO.listApplication();
-	}
+	}*/
 	@RequestMapping(value="/justtochecks",method=RequestMethod.GET)
 	public String abcd() {
 		System.out.println("=== In justtocheck List ===");
