@@ -49,7 +49,7 @@ public class Application {
 	String departmentPI;
 	@Temporal(TemporalType.DATE)
 	Date startdate;
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	Date enddate;
 	String substrate;
 	String substrateOther;
@@ -72,7 +72,7 @@ public class Application {
 //	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Applicant> applicantRow;
 	@OneToMany(targetEntity=Applicant.class,mappedBy="application",
-			cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+			cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonManagedReference
 	public List<Applicant> getApplicantRow() {
 		return applicantRow;
@@ -84,7 +84,7 @@ public class Application {
 //	@Transient
 	private List<ExperimentalConditions> experimentRow;
 	@OneToMany(targetEntity=ExperimentalConditions.class,mappedBy="application",
-			cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+			cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonManagedReference
 	public List<ExperimentalConditions> getExperimentRow() {
 		return experimentRow;

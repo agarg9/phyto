@@ -21,6 +21,10 @@
 			templateUrl: "partials/newAppl.html",
 			controller: "newApplController"
 		})
+		.when("/openApp",{
+			templateUrl: "partials/newAppl.html",
+			controller: "newApplController"
+		})
 		.when("/chambers", {
 			templateUrl: "partials/assgnChambers.html",
 			controller: "chamberController"
@@ -30,9 +34,9 @@
 			controller: "chamberController"
 		})
 		.when("/sampleData", {	
-                        templateUrl: "partials/sampledata.html",			
-                        controller: "sampledataController"			
-                }) 
+			templateUrl: "partials/sampledata.html",			
+			controller: "sampledataController"			
+		}) 
 		.otherwise({
 			redirectTo: '/'
 		});
@@ -55,7 +59,7 @@
 				alert( "failure message: " + JSON.stringify({data: data}));
 			});
 		}
-		
+
 	})
 	.controller("loginController", function ($scope,$http) {
 		$scope.message = "under Login controller";
@@ -76,8 +80,8 @@
 		}
 	})
 	.controller("homeController", function ($scope,$http) {
-		
-		$scope.savedApps=$http.get('/applicationList')
+
+		$scope.savedApps=$http.get('/showAppList')
 		.then(function success(response) {
 			$scope.applicationList = response.data;
 			$scope.config = response.config;
@@ -90,8 +94,9 @@
 			$scope.status = response.data;
 			$log.info(response);
 		});
-		
-		
+
+
+
 		$scope.message = "under home controller";
 		var savedApps = [
 		                 {
@@ -119,7 +124,7 @@
 		                	 lastModified: "3/25/2015 17:23"
 		                 }
 		                 ];
-// $scope.savedApps = savedApps;
+//		$scope.savedApps = savedApps;
 
 	})
 	.controller("newApplController", function ($scope,$http) {
@@ -203,8 +208,8 @@
 			}
 		}
 		abc={namePI:"ank"
-// emailPI:"aa@aa.cc"
-					};
+//			emailPI:"aa@aa.cc"
+		};
 		$scope.list = [];
 		$scope.submit = function () {
 			if ($scope.appForm) {
@@ -229,18 +234,18 @@
 			.error(function(data, status, headers, config) {
 				alert( "failure message: " + JSON.stringify({data: data}));
 			});
-			
-		/*
-		 * if ($scope.appForm) { $scope.listb.push(this.appForm); $scope.appForm =
-		 * ''; }
-		 */
+
+			/*
+			 * if ($scope.appForm) { $scope.listb.push(this.appForm); $scope.appForm =
+			 * ''; }
+			 */
 		}
 		$scope.return = function () {
 			window.history.back();
 		}
 
 	}).controller("chamberController", function ($scope, $http,$log) {
-// $http.get('http://localhost:8080/greeting')
+//		$http.get('http://localhost:8080/greeting')
 		$http.get('/greeting')
 		.then(function success(response) {
 			$scope.greeting = response.data;
@@ -350,8 +355,8 @@
 		$scope.reverseSort = false;
 		$scope.sortData = function (column) {
 			$scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false; // If
-																								// else
-																								// condition
+			// else
+			// condition
 			$scope.sortColumn = column;
 		}
 		$scope.getSortClass = function (column) {

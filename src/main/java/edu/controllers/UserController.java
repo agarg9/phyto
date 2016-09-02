@@ -1,5 +1,6 @@
 package edu.controllers;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,21 @@ public class UserController {
 //			return ex.getMessage();
 		}
 		return app;
+	}
+	@RequestMapping(value="/application",method=RequestMethod.GET)
+	public Application getApplication(@RequestBody Application apps){
+		return apps;
+	}
+	
+	
+	@RequestMapping(value="/showAppList",method=RequestMethod.GET)
+	public List<Application> listAllApplications()  {
+		List<Application> applicationList = applicationDAO.listApps();
+		System.out.println("Size of apps: "+applicationList.size());
+		System.out.println("Start Date Format: "+applicationList.get(0).getStartdate());
+		System.out.println("End Date Format: "+applicationList.get(0).getEnddate());
+//		System.out.println("Value of apps: "+applicationList.get(11).getEmailPI());
+		return applicationList;
 	}
 	/*@RequestMapping(value="/applicationList",method=RequestMethod.GET)
 	public List getApplications() {
