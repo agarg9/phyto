@@ -88,6 +88,7 @@ public class ApplicationDAO {
 			 for(ExperimentalConditions rowExp :applicationData.getExperimentRow()){
 				 rowExp.setApplication(applicationData);
 			 }
+			 applicationData.updateTimeStamps();
 			 System.out.println("Exp save");
 			 getSession().save(applicationData);
 			 System.out.println("Application save");

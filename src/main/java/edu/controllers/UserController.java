@@ -53,6 +53,7 @@ public class UserController {
 		System.out.println("Size of apps: "+applicationList.size());
 		System.out.println("Start Date Format: "+applicationList.get(0).getStartdate());
 		System.out.println("End Date Format: "+applicationList.get(0).getEnddate());
+		System.out.println("Updated time Format: "+applicationList.get(0).getLastModified());
 //		System.out.println("Value of apps: "+applicationList.get(11).getEmailPI());
 		return applicationList;
 	}

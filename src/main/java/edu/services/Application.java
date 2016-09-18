@@ -16,6 +16,7 @@ import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -37,17 +38,47 @@ public class Application {
 	public void setApplication_id(long application_id) {
 		this.application_id = application_id;
 	}
-	public String getLastModified() {
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getLastModified() {
 		return lastModified;
 	}
-	public void setLastModified(String lastModified) {
+	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}
+	/* @Temporal(TemporalType.TIMESTAMP)
+	    @Column(name = "created", nullable = false)
+	    private Date created;
+
+	    @Temporal(TemporalType.TIMESTAMP)
+	    @Column(name = "updated", nullable = false)
+	    private Date updated;
+
+	    @PrePersist
+	    protected void onCreate() {
+	    updated = created = new Date();
+	    }
+
+	    @PreUpdate
+	    protected void onUpdate() {
+	    updated = new Date();
+	    }
+	public Date getCreated() {
+			return created;
+		}
+		public void setCreated(Date created) {
+			this.created = created;
+		}
+		public Date getUpdated() {
+			return updated;
+		}
+		public void setUpdated(Date updated) {
+			this.updated = updated;
+		}*/
 	String projectTitle;
 	String namePI;
 	String emailPI;
 	String departmentPI;
-	@Temporal(TemporalType.DATE)
+	
 	Date startdate;
 //	@Temporal(TemporalType.DATE)
 	Date enddate;
@@ -92,10 +123,20 @@ public class Application {
 	public void setExperimentRow(List<ExperimentalConditions> experimentRow) {
 		this.experimentRow = experimentRow;
 	}
-	String lastModified;
+	
+	Date lastModified;
+	Date dateCreated;
+	@PreUpdate
+	@PrePersist
+	public void updateTimeStamps() {
+	    lastModified = new Date();
+	    if (dateCreated==null) {
+	    	dateCreated = new Date();
+	    }
+	}
 	public Application(){
 	}
-	public Application(String projectTitle,Date startdate,Date enddate,String lastModified){
+	public Application(String projectTitle,Date startdate,Date enddate,Date lastModified){
 		this.projectTitle=projectTitle;
 		this.startdate=startdate;
 		this.enddate=enddate;
@@ -137,12 +178,15 @@ public class Application {
 	public void setDepartmentPI(String departmentPI) {
 		this.departmentPI = departmentPI;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getStartdate() {
 		return startdate;
 	}
 	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
+//	@JsonFormat(pattern="MM-dd-yyyy")
+	@Temporal(TemporalType.DATE)
 	public Date getEnddate() {
 		return enddate;
 	}
