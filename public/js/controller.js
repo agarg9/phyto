@@ -227,6 +227,7 @@ app.controller("newApplController", function ($scope,$http,$location,$rootScope,
 				alert( "failure message: " + JSON.stringify({data: data}));
 			});
 			$scope.appForm = '';
+//			$scope.returnBack();
 
 		}
 	};
@@ -239,13 +240,12 @@ app.controller("newApplController", function ($scope,$http,$location,$rootScope,
 		.error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
-
 		/*
 		 * if ($scope.appForm) { $scope.listb.push(this.appForm); $scope.appForm =
 		 * ''; }
 		 */
 	}
-	$scope.return = function () {
+	$scope.returnBack = function () {
 		window.history.back();
 	}
 

@@ -99,7 +99,14 @@ public class Application {
 	String otherCity;
 	String otherState;
 	String otherZip;
-//	@Transient
+	String type;
+public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	//	@Transient
 //	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Applicant> applicantRow;
 	@OneToMany(targetEntity=Applicant.class,mappedBy="application",
@@ -178,6 +185,7 @@ public class Application {
 	public void setDepartmentPI(String departmentPI) {
 		this.departmentPI = departmentPI;
 	}
+//	@JsonFormat(pattern="MM/dd/yyyy")
 	@Temporal(TemporalType.DATE)
 	public Date getStartdate() {
 		return startdate;
@@ -185,7 +193,7 @@ public class Application {
 	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
-//	@JsonFormat(pattern="MM-dd-yyyy")
+//	@JsonFormat(pattern="MM/dd/yyyy")
 	@Temporal(TemporalType.DATE)
 	public Date getEnddate() {
 		return enddate;

@@ -5,6 +5,8 @@ app.service('share',function(){
 	var dataApp={}
 	this.setShare = function(data){
 		dataApp=data;
+		dataApp.startdate = new Date(data.startdate);
+		dataApp.enddate = new Date(data.enddate);
 	}
 	this.getShare = function(){
 		return dataApp;

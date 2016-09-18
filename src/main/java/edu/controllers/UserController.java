@@ -33,6 +33,7 @@ public class UserController {
 	public Application sumitApp(@RequestBody Application app ){
 		System.out.println(app.getNamePI()+", "+app.getEmailPI()+" , "+app.getDepartmentPI());
 		System.out.println("==== in submitApp ====");
+		app.setType("Submitted");
 		try{
 			System.out.println("......");
 			applicationDAO.save(app);//, app.getExperimentRow(),app.getApplicantRow());
@@ -41,6 +42,20 @@ public class UserController {
 		}
 		return app;
 	}
+	@RequestMapping(value="/saveApp",method=RequestMethod.POST)
+	public Application saveApp(@RequestBody Application app ){
+		System.out.println(app.getNamePI()+", "+app.getEmailPI()+" , "+app.getDepartmentPI());
+		System.out.println("==== in submitApp ====");
+		app.setType("Saved");
+		try{
+			System.out.println("......");
+			applicationDAO.save(app);//, app.getExperimentRow(),app.getApplicantRow());
+		}catch(Exception ex){
+//			return ex.getMessage();
+		}
+		return app;
+	}
+	
 	@RequestMapping(value="/application",method=RequestMethod.GET)
 	public Application getApplication(@RequestBody Application apps){
 		return apps;
