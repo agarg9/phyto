@@ -66,13 +66,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="historyApp in historyApps | orderBy:sortColumn:reverseSort">
-                    <td>{{historyApp.projectId}}</td>
+                <tr ng-repeat="historyApp in allApplicationList | orderBy:sortColumn:reverseSort">
+                    <td>{{historyApp.application_id}}</td>
                     <td><a href="#">{{historyApp.projectTitle}}</a></td>
-                    <td>{{historyApp.status}}</td>
+                    <td>{{historyApp.type}}</td>
                     <td>{{historyApp.submitDate| date:"dd-MMM-yy"}}</td>
-                    <td>{{historyApp.start| date:"dd/MMM/yy"}}</td>
-                    <td>{{historyApp.end| date:"dd/MMM/yy"}}</td>
+                    <td>{{historyApp.startdate| date:"dd/MMM/yy"}}</td>
+                    <td>{{historyApp.enddate| date:"dd/MMM/yy"}}</td>
                     <td>{{historyApp.lastModified|date:"MMM d, y h:mm:ss a"}}</td>
                 </tr>
             </tbody>

@@ -29,7 +29,7 @@ public class UserController {
 		System.out.println("==== in LoginApp ====");
 		return user;
 	}
-	@RequestMapping(value="/submitApp",method=RequestMethod.POST)
+	/*@RequestMapping(value="/submitApp",method=RequestMethod.POST)
 	public Application sumitApp(@RequestBody Application app ){
 		System.out.println(app.getNamePI()+", "+app.getEmailPI()+" , "+app.getDepartmentPI());
 		System.out.println("==== in submitApp ====");
@@ -41,8 +41,8 @@ public class UserController {
 //			return ex.getMessage();
 		}
 		return app;
-	}
-	@RequestMapping(value="/saveApp",method=RequestMethod.POST)
+	}*/
+	/*@RequestMapping(value="/saveApp",method=RequestMethod.POST)
 	public Application saveApp(@RequestBody Application app ){
 		System.out.println(app.getNamePI()+", "+app.getEmailPI()+" , "+app.getDepartmentPI());
 		System.out.println("==== in submitApp ====");
@@ -54,7 +54,7 @@ public class UserController {
 //			return ex.getMessage();
 		}
 		return app;
-	}
+	}*/
 	
 	@RequestMapping(value="/application",method=RequestMethod.GET)
 	public Application getApplication(@RequestBody Application apps){
@@ -62,7 +62,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value="/showAppList",method=RequestMethod.GET)
+	/*@RequestMapping(value="/showAppList",method=RequestMethod.GET)
 	public List<Application> listAllApplications()  {
 		List<Application> applicationList = applicationDAO.listApps();
 		System.out.println("Size of apps: "+applicationList.size());
@@ -71,7 +71,7 @@ public class UserController {
 		System.out.println("Updated time Format: "+applicationList.get(0).getLastModified());
 //		System.out.println("Value of apps: "+applicationList.get(11).getEmailPI());
 		return applicationList;
-	}
+	}*/
 	/*@RequestMapping(value="/applicationList",method=RequestMethod.GET)
 	public List getApplications() {
 		System.out.println("=== In Application List ===");

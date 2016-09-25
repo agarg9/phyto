@@ -37,17 +37,9 @@ app.controller("loginController", function ($scope,$http) {
 		$scope.login="";
 	}
 })
-/*app.service('share',function(){
-	var dataApp={}
-	this.setShare = function(data){
-		dataApp=data;
-	}
-	this.getShare = function(){
-		return dataApp;
-	}
-})*/
+
 app.controller("homeController", function ($scope,$http,$log,shareData,share, $rootScope) {
-	$scope.savedApps=$http.get('/showAppList')
+	$scope.savedApps=$http.get('/showSavedAppList')
 	.then(function success(response) {
 		$scope.applicationList = response.data;
 		$scope.config = response.config;
@@ -308,8 +300,8 @@ app.controller("chamberController", function ($scope, $http,$log) {
 	                       }
 	                       ];
 })
-app.controller("historyController", function ($scope) {
-	var historyApps = [
+app.controller("historyController", function ($scope,$http) {
+	/*var historyApps = [
 	                   {
 	                	   projectId: 558343,
 	                	   projectTitle: "Sample Project 1",
@@ -355,8 +347,15 @@ app.controller("historyController", function ($scope) {
 	                	   end: "6/6/2016",
 	                	   lastModified: "2015-11-08T21:43:40.000Z"
 	                   }
-	                   ];
-	$scope.historyApps = historyApps;
+	                   ];*/
+//	$scope.historyApps = historyApps;
+	$scope.historyApps = $http.get("/showAllAppList")
+	.then(function success(response){
+		$scope.allApplicationList = response.data;
+	},function failure(response){
+		$scope.allApplicationList = response.data;
+	})
+	
 	$scope.sortColumn = "projectTitle";
 	$scope.reverseSort = false;
 	$scope.sortData = function (column) {
@@ -380,32 +379,3 @@ app.controller("applicationController",
 		return viewLocation === $location.path();
 	};
 });
-
-//Under home controller
-/*var savedApps = [
-{
-	 title: "Sample Project 1",
-	 start: "4/3/2016",
-	 end: "6/6/2016",
-	 lastModified: "3/25/2015 12:13"
-},
-{
-	 title: "Sample Project 2",
-	 start: "4/3/2014",
-	 end: "6/16/2016",
-	 lastModified: "7/15/2015 11:44"
-},
-{
-	 title: "Sample Project 3",
-	 start: "11/8/2016",
-	 end: "6/6/2017",
-	 lastModified: "7/03/2016 17:05"
-},
-{
-	 title: "Sample Project 4",
-	 start: "5/25/2016",
-	 end: "9/30/2016",
-	 lastModified: "3/25/2015 17:23"
-}
-];*/
-//$scope.savedApps = savedApps;

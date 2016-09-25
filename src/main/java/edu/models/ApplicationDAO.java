@@ -37,13 +37,17 @@ public class ApplicationDAO {
 
 package edu.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -125,14 +129,14 @@ public class ApplicationDAO {
 	 }
 
 //	 @JsonIgnore
-	 public List<Application> listApps() {
-		 //			Session session = sessionFactory.getCurrentSession();
+	 public List<Application> listSavedApps() {
 		 List<Application> application = null;
+		 System.out.println("Session :"+getSession());
 		 try {
-			 application = (List<Application>)getSession().createQuery("from Application").list();
-//			 System.out.println("======================="+application.get(0).getEmailPI());
-//			 System.out.println(application);
-//			 System.out.println("-----------------------"+application.get(11).getExperimentRow().get(0).getContainerSize());
+			 Query query = getSession().createQuery("from Application where type = 'Saved'");
+//			 query.setParameter("type", type);
+//			 application = (List<Application>)getSession().createQuery("from Application").list();
+			 application = query.list();
 			 System.out.println(application.size());
 		 } catch (Exception e) {
 			 e.printStackTrace();
@@ -140,6 +144,31 @@ public class ApplicationDAO {
 		 return application;
 	 }
 
+	 public List<Application> listSampAllApps() {
+		 List<Application> application = null;
+		 try {
+			 Query query = getSession().createQuery("from Application where type <> 'Saved'");
+			 application = query.list();
+			 System.out.println(application.size());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		 return application;
+	 }
+	 
+	 public List listAllApps() {
+		 List application =  null;
+		 try {
+			 SQLQuery query = getSession().createSQLQuery("Select application_id,type,startdate,enddate,lastModified,projectTitle from Application where type <> 'Saved'");
+			 query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			 application = query.list();
+			 System.out.println(application.size());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		 return application;
+	 }
+	 
 	 @SuppressWarnings("unchecked")
 	 public List<ApplicationData> getAll() {
 		 return getSession().createQuery("from ApplicationData").list();

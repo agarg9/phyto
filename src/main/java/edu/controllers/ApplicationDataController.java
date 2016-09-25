@@ -1,4 +1,4 @@
-package edu.controllers;
+/*package edu.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class ApplicationDataController {
 	  
 	  
 	  
-	 /* @RequestMapping(value="/get-by-email")
+	  @RequestMapping(value="/get-by-email")
 	  @ResponseBody
 	  public String getByEmail(String email) {
 	    String userId;
@@ -60,7 +60,7 @@ public class ApplicationDataController {
 	      return "User not found 123";
 	    }
 	    return "The user id is: " + userId + " and name is: "+ name;
-	  }*/
+	  }
 	  
 	  @RequestMapping(value="/get-by-id")
 	  @ResponseBody
@@ -157,3 +157,4 @@ public class ApplicationDataController {
 		this._applicationDataDao = _applicationDataDao;
 	}
 }
+*/
