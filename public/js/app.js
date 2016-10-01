@@ -5,7 +5,7 @@
 	.config(function ($routeProvider) {
 		$routeProvider
 		.when("/", {
-			templateUrl: "partials/login.html",
+			templateUrl: "partials/home.html",
 			controller: "loginController"
 		})
 		.when("/home", {
